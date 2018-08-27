@@ -15,4 +15,23 @@ describe("testing subdocuments ", () => {
         done();
       });
   });
+
+  it("can add new subdocument to posts ", done => {
+    const joe = new User({
+      name: "Joe",
+      posts: []
+    });
+    joe
+      .save()
+      .then(() => User.findOne({ name: "Joe" }))
+      .then(user => {
+        user.posts.push({ title: "newPost" });
+        return user.save();
+      })
+      .then(() => User.findOne({ name: "Joe" }))
+      .then(user => {
+        assert(user.posts[0].title === "newPost");
+        done();
+      });
+  });
 });
