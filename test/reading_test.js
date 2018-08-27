@@ -14,4 +14,13 @@ describe("Reading users from the database", () => {
       done();
     });
   });
+
+  it("find a user with a prticular id", done => {
+    User.findOne({ _id: joe._id })
+      .then(user => {
+        assert(user.name === "Joe");
+        done();
+      })
+      .catch(err => console.warn(err));
+  });
 });
