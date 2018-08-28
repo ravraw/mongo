@@ -13,6 +13,7 @@ describe("Deleting records", () => {
       .remove()
       .then(() => User.findOne({ name: "Joe" }))
       .then(user => {
+        console.log(user);
         assert(user === null);
         done();
       });
